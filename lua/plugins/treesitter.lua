@@ -4,7 +4,16 @@ return {
     lazy = false,
     build = ':TSUpdate',
     config = function()
-        require('nvim-treesitter').install { 'lua', 'c_sharp' }
+        require('nvim-treesitter').install {
+            'lua',
+            'c_sharp'
+        }
+        vim.api.nvim_create_autocmd('FileType', {
+            pattern = { 'cs' },
+            callback = function()
+                vim.treesitter.start()
+            end
+        })
     end
 }
 
